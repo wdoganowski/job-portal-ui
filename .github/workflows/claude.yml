@@ -35,14 +35,15 @@ jobs:
         uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          prompt: 'Always use the guidelines from CLAUDE.md in this repository. Update the pull request description to include a summary of changes.'
 
           # This is an optional setting that allows Claude to read CI results on PRs
           additional_permissions: |
             actions: read
 
-          # Optional: Give a custom prompt to Claude. If this is not specified, Claude will perform the instructions specified in the comment that tagged it.
-          # prompt: 'Update the pull request description to include a summary of changes.'
+          # No custom prompt: Claude performs the instructions specified in whatever
+          # comment/issue/review tagged it. A hardcoded prompt here would apply to
+          # every trigger in this workflow (including plain issues with no associated
+          # PR), overriding the actual request and leaving Claude with nothing to do.
 
           # Optional: Add claude_args to customize behavior and configuration
           # See https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
