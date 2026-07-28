@@ -45,8 +45,10 @@ jobs:
           # every trigger in this workflow (including plain issues with no associated
           # PR), overriding the actual request and leaving Claude with nothing to do.
 
-          # Optional: Add claude_args to customize behavior and configuration
+          # Allow Claude to run npm commands (install, dev, lint, build, preview)
+          # and read PR info via gh, without prompting for permission.
           # See https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
           # or https://code.claude.com/docs/en/cli-reference for available options
-          # claude_args: '--allowed-tools Bash(gh pr *)'
+          claude_args: |
+            --allowed-tools "Bash(npm *)" "Bash(gh pr *)"
 
